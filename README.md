@@ -10,7 +10,7 @@ Visit the **[download page](https://burnoutos.github.io/vehium)** to get the lat
 |----------|-----|------|
 | Android | Customer | [Download APK](https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Customer.apk) |
 | Android | Workshop | [Download APK](https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Workshop.apk) |
-| Windows | Workshop | [Download EXE](https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Setup-1.0.0.exe) |
+| Windows | Workshop | [Download EXE](https://github.com/burnoutos/vehium/releases/latest/download/Vehium.Setup.1.0.0.exe) |
 | iOS | Customer & Workshop | Via [TestFlight](mailto:info@vehium.com?subject=Vehium%20iOS%20TestFlight%20Access) |
 
 ## Installation Guides
