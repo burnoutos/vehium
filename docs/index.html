@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehium – Download</title>
+  <meta name="description" content="Download Vehium apps for Android, iOS, and Windows. Garage management and real-time vehicle status notifications.">
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text: #202124;
+      --text-secondary: #5f6368;
+      --border: #e0e0e0;
+      --success: #34a853;
+      --android: #3ddc84;
+      --windows: #0078d4;
+      --apple: #555555;
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 20px 50px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    .card-icon.android { background: #e8f5e9; }
+    .card-icon.windows { background: #e3f2fd; }
+    .card-icon.apple { background: #f5f5f5; }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .card .description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .card .meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+
+    .btn-android {
+      background: #2e7d32;
+      color: white;
+    }
+    .btn-android:hover { background: #1b5e20; }
+
+    .btn-windows {
+      background: #0078d4;
+      color: white;
+    }
+    .btn-windows:hover { background: #005a9e; }
+
+    .btn-apple {
+      background: #333;
+      color: white;
+    }
+    .btn-apple:hover { background: #111; }
+
+    .instructions {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      margin-bottom: 48px;
+    }
+
+    .instructions h2 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    .instructions h3 {
+      font-size: 1.05rem;
+      margin: 20px 0 8px;
+      color: var(--text);
+    }
+
+    .instructions p, .instructions li {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .instructions ol, .instructions ul {
+      padding-left: 24px;
+    }
+
+    .platform-tab {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .platform-tab button {
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .platform-tab button.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .platform-tab button:hover:not(.active) {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .warning-box {
+      background: #fff8e1;
+      border: 1px solid #ffcc02;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      font-size: 0.9rem;
+      color: #5d4037;
+    }
+
+    .warning-box strong { color: #e65100; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .cards { grid-template-columns: 1fr; }
+      .container { padding: 24px 16px; }
+    }
+
+    /* SVG icons inline */
+    .icon-android { color: #3ddc84; }
+    .icon-windows { color: #0078d4; }
+    .icon-apple { color: #555; }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>Vehium</h1>
+    <p>Garage management system with real-time vehicle status notifications for workshops and customers.</p>
+  </div>
+
+  <div class="container">
+
+    <h2 class="section-title">Download</h2>
+
+    <div class="cards">
+
+      <!-- Android Customer -->
+      <div class="card">
+        <div class="card-icon android">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#3ddc84"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
+        </div>
+        <h3>Customer App</h3>
+        <p class="subtitle">Android <span class="version-badge">v1.0.0</span></p>
+        <p class="description">Track your vehicle's service status in real time. Get notified when your car is ready.</p>
+        <div class="meta">
+          <span>~93 MB</span>
+          <span>Android 7.0+</span>
+          <span>APK</span>
+        </div>
+        <a href="https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Customer.apk" class="btn btn-android">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download APK
+        </a>
+      </div>
+
+      <!-- Android Workshop -->
+      <div class="card">
+        <div class="card-icon android">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#3ddc84"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
+        </div>
+        <h3>Workshop App</h3>
+        <p class="subtitle">Android <span class="version-badge">v1.0.0</span></p>
+        <p class="description">Manage jobs, update service status, and keep your customers informed in real time.</p>
+        <div class="meta">
+          <span>~95 MB</span>
+          <span>Android 7.0+</span>
+          <span>APK</span>
+        </div>
+        <a href="https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Workshop.apk" class="btn btn-android">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download APK
+        </a>
+      </div>
+
+      <!-- Windows Workshop -->
+      <div class="card">
+        <div class="card-icon windows">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#0078d4"><path d="M3 12V6.75l6-1.32v6.48L3 12zm17-9v8.75l-10 .08V5.21L20 3zm-10 9.32l10-.08V21l-10-1.76V12.32zM3 12.25l6 .09v6.33l-6-1.07V12.25z"/></svg>
+        </div>
+        <h3>Workshop App</h3>
+        <p class="subtitle">Windows <span class="version-badge">v1.0.0</span></p>
+        <p class="description">Full desktop workshop management. Manage jobs and communicate with customers from your PC.</p>
+        <div class="meta">
+          <span>~93 MB</span>
+          <span>Windows 10/11</span>
+          <span>EXE</span>
+        </div>
+        <a href="https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Setup-1.0.0.exe" class="btn btn-windows">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download for Windows
+        </a>
+      </div>
+
+    </div>
+
+    <!-- iOS Section -->
+    <div class="cards">
+      <div class="card" style="grid-column: 1 / -1; max-width: 100%;">
+        <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+          <div class="card-icon apple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#555"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          </div>
+          <div style="flex: 1; min-width: 250px;">
+            <h3>iOS Apps</h3>
+            <p class="subtitle">Customer &amp; Workshop via TestFlight</p>
+            <p class="description" style="margin-bottom: 12px;">
+              Vehium for iOS is distributed through Apple TestFlight. Contact us to receive your invitation link.
+            </p>
+            <div class="meta">
+              <span>iOS 15.0+</span>
+              <span>iPhone &amp; iPad</span>
+              <span>TestFlight</span>
+            </div>
+            <a href="mailto:info@vehium.com?subject=Vehium%20iOS%20TestFlight%20Access" class="btn btn-apple" style="max-width: 260px;">
+              Request TestFlight Access
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation Instructions -->
+    <div class="instructions">
+      <h2>Installation Instructions</h2>
+
+      <div class="platform-tab">
+        <button class="active" onclick="showTab('android')">Android</button>
+        <button onclick="showTab('windows')">Windows</button>
+        <button onclick="showTab('ios')">iOS</button>
+      </div>
+
+      <div id="tab-android" class="tab-content active">
+        <div class="warning-box">
+          <strong>Note:</strong> Since these APKs are not from the Play Store, your device will ask for permission to install. This is normal for all directly-distributed Android apps.
+        </div>
+
+        <h3>1. Allow installation from unknown sources</h3>
+        <ul>
+          <li><strong>Android 8+:</strong> Settings &rarr; Apps &rarr; Special App Access &rarr; Install Unknown Apps &rarr; find your browser &rarr; Allow.</li>
+          <li><strong>Android 7 and below:</strong> Settings &rarr; Security &rarr; enable Unknown Sources.</li>
+        </ul>
+
+        <h3>2. Google Play Protect warning</h3>
+        <p>You may see "App not recognized". Tap <strong>More details</strong> then <strong>Install anyway</strong>. The app is safe.</p>
+
+        <h3>3. Install</h3>
+        <ol>
+          <li>Download the APK file from above.</li>
+          <li>Open the downloaded file from your notifications or file manager.</li>
+          <li>Follow the on-screen prompts to install.</li>
+          <li>Open <strong>Vehium</strong> from your app drawer.</li>
+        </ol>
+      </div>
+
+      <div id="tab-windows" class="tab-content">
+        <div class="warning-box">
+          <strong>Note:</strong> Windows SmartScreen may show a warning because the app is distributed outside the Microsoft Store. This is normal.
+        </div>
+
+        <h3>1. SmartScreen warning</h3>
+        <ol>
+          <li>When the blue SmartScreen dialog appears, click <strong>More info</strong>.</li>
+          <li>Then click <strong>Run anyway</strong>.</li>
+        </ol>
+
+        <h3>2. Install</h3>
+        <ol>
+          <li>Download the installer from above.</li>
+          <li>Double-click the downloaded <code>.exe</code> file.</li>
+          <li>Follow the installation wizard.</li>
+          <li>Open <strong>Vehium Workshop</strong> from your desktop or Start menu.</li>
+          <li>Log in with your workshop credentials.</li>
+        </ol>
+      </div>
+
+      <div id="tab-ios" class="tab-content">
+        <h3>1. Install TestFlight</h3>
+        <p>Download <a href="https://apps.apple.com/app/testflight/id899247664" target="_blank" rel="noopener">TestFlight</a> from the App Store (free).</p>
+
+        <h3>2. Accept the invitation</h3>
+        <p>Open the invitation link sent by the Vehium team on your iPhone or iPad. Accept the invite and install through TestFlight.</p>
+
+        <h3>3. Updates</h3>
+        <p>When a new version is available, TestFlight will notify you. Open TestFlight and tap <strong>Update</strong>.</p>
+
+        <p style="margin-top: 12px;">TestFlight builds expire after <strong>90 days</strong>. If the app stops working, request a new build from the team.</p>
+      </div>
+    </div>
+
+    <!-- Requirements -->
+    <div class="instructions">
+      <h2>Requirements</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 16px;">
+        <div>
+          <h3>Android</h3>
+          <ul>
+            <li>Android 7.0 (Nougat) or higher</li>
+            <li>~120 MB free storage</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Windows</h3>
+          <ul>
+            <li>Windows 10 or 11 (64-bit)</li>
+            <li>~200 MB free storage</li>
+            <li>Internet connection required</li>
+          </ul>
+        </div>
+        <div>
+          <h3>iOS</h3>
+          <ul>
+            <li>iOS 15.0 or higher</li>
+            <li>iPhone or iPad</li>
+            <li>~120 MB free storage</li>
+            <li>TestFlight app installed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>
+      <strong>Vehium</strong> &mdash; Garage Management System
+      <br>
+      Need help? <a href="mailto:info@vehium.com">info@vehium.com</a>
+    </p>
+    <p style="margin-top: 8px;">&copy; 2026 Vehium. All rights reserved.</p>
+  </div>
+
+  <script>
+    function showTab(tab) {
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      document.querySelectorAll('.platform-tab button').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      document.getElementById('tab-' + tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
