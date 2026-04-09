@@ -103,6 +103,53 @@ Coming soon to the App Store and Google Play worldwide. To join our internal tes
 
 ---
 
+## Infrastructure
+
+Vehium runs on a self-hosted **3-node k3s high-availability cluster** built on bare metal. No cloud VMs — real hardware, full control.
+
+### Architecture
+
+```
+         vehium.com / app.vehium.com / customer.vehium.com
+                          │
+                      Traefik + Let's Encrypt
+                          │
+         ┌────────────────┼────────────────┐
+         │                │                │
+    ┌─────────┐     ┌─────────┐     ┌─────────┐
+    │  Node 1 │     │  Node 2 │     │  Node 3 │
+    │  16 GB  │     │  16 GB  │     │  16 GB  │
+    │ MASTER  │     │ MASTER  │     │ MASTER  │
+    │ PG PRI  │◄───►│ PG REP  │◄───►│ PG REP  │
+    └─────────┘     └─────────┘     └─────────┘
+         │
+    Eaton UPS (auto-shutdown + auto-restart)
+         │
+    Hetzner Cloud (daily encrypted backups)
+```
+
+### Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Orchestration | k3s (lightweight Kubernetes) — 3 master nodes |
+| Database | PostgreSQL via CloudNativePG — WAL streaming replication |
+| Storage | Longhorn — 3x replicated block storage for uploads |
+| Ingress | Traefik with automatic Let's Encrypt TLS |
+| GitOps | ArgoCD — git push to deploy |
+| Backups | Daily automated backups to Hetzner Cloud |
+| Power | UPS-protected with NUT graceful shutdown |
+| CI/CD | Docker Hub (burnoutos) → ArgoCD auto-sync |
+
+### Resilience
+
+- **Node failure** — k3s maintains quorum, pods reschedule automatically, CNPG promotes a Postgres replica within seconds
+- **Power outage** — UPS triggers graceful cluster shutdown, BIOS auto-restarts all nodes when power returns
+- **Disk failure** — Longhorn serves data from remaining replicas and re-replicates to healthy nodes
+- **Full cluster loss** — complete rebuild from Hetzner backups in ~2-4 hours
+
+---
+
 ## Languages
 
 Vehium is fully localized in **8 languages**:
