@@ -99,7 +99,7 @@ Vehium is a smart garage management platform that helps workshops manage their e
 
 Coming soon to the App Store and Google Play worldwide. To join our internal testing program, email **[info@vehium.com](mailto:info@vehium.com?subject=Vehium%20Internal%20Testing%20Access)** — we'll get back to you within 24 hours.
 
-> Detailed guides: [iOS Customer](README-ios-customer.md) | [iOS Workshop](README-ios-workshop.md) | [Android Customer](README-android-customer.md) | [Android Workshop](README-android-workshop.md)
+> Detailed guide: [Mobile Apps (iOS & Android)](README-mobile.md)
 
 ---
 
