@@ -57,43 +57,34 @@ Vehium is a smart garage management platform that helps workshops manage their e
 
 | Platform | Download | Requirements |
 |----------|----------|--------------|
+| **Windows** | [**Vehium Setup (x64)**](https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Setup-x64.exe) | Windows 10/11 (64-bit) |
 | **Web** | [app.vehium.com](https://app.vehium.com) | Any modern browser |
-| **Windows** | [**Vehium Setup (EXE)**](https://github.com/burnoutos/vehium/releases/latest/download/Vehium.Setup.1.0.0.exe) | Windows 10/11 (64-bit) |
-| **Android** | [**Vehium Workshop (APK)**](https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Workshop.apk) | Android 7.0+ |
-| **iOS** | Via TestFlight — [request access](mailto:info@vehium.com?subject=Vehium%20iOS%20TestFlight%20Access) | iOS 15.0+ |
+| **iOS** | Coming soon to the App Store | iOS 15.0+ |
+| **Android** | Coming soon to Google Play | Android 7.0+ |
 
 ### Customer App
 
 | Platform | Download | Requirements |
 |----------|----------|--------------|
-| **Android** | [**Vehium Customer (APK)**](https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Customer.apk) | Android 7.0+ |
-| **iOS** | Via TestFlight — [request access](mailto:info@vehium.com?subject=Vehium%20iOS%20TestFlight%20Access) | iOS 15.0+ |
 | **Web** | [customer.vehium.com](https://customer.vehium.com) | Any modern browser |
+| **iOS** | Coming soon to the App Store | iOS 15.0+ |
+| **Android** | Coming soon to Google Play | Android 7.0+ |
+
+> Want early access? Email us at **[info@vehium.com](mailto:info@vehium.com?subject=Vehium%20Internal%20Testing%20Access)** to join our internal testing program — we'll get back to you within 24 hours.
 
 ---
 
 ## Platforms
 
-| | Web | Windows | Android | iOS |
+| | Windows | Web | iOS | Android |
 |---|:---:|:---:|:---:|:---:|
-| Workshop App | **Yes** | **Yes** | **Yes** | **Yes** |
-| Customer App | **Yes** | — | **Yes** | **Yes** |
+| Workshop App | **Yes** | **Yes** | Coming Soon | Coming Soon |
+| Customer App | — | **Yes** | Coming Soon | Coming Soon |
 | Real-time Sync | **Yes** | **Yes** | **Yes** | **Yes** |
 
 ---
 
 ## Installation
-
-### Android (APK)
-
-Both the Customer and Workshop APKs are distributed directly — not via the Play Store.
-
-1. **Enable unknown sources:** Settings > Apps > Special App Access > Install Unknown Apps > Allow your browser.
-2. **Download** the APK from the links above.
-3. **Open** the downloaded file and follow the on-screen prompts.
-4. Google Play Protect may show a warning — tap **More details > Install anyway**. The app is safe.
-
-> Detailed guide: [Customer](README-android-customer.md) | [Workshop](README-android-workshop.md)
 
 ### Windows (EXE)
 
@@ -104,13 +95,11 @@ Both the Customer and Workshop APKs are distributed directly — not via the Pla
 
 > Detailed guide: [Windows Workshop](README-windows-workshop.md)
 
-### iOS (TestFlight)
+### iOS & Android
 
-1. Install [TestFlight](https://apps.apple.com/app/testflight/id899247664) from the App Store.
-2. Contact us at **info@vehium.com** to receive your invitation link.
-3. Open the link on your device and follow the TestFlight prompts.
+Coming soon to the App Store and Google Play worldwide. To join our internal testing program, email **[info@vehium.com](mailto:info@vehium.com?subject=Vehium%20Internal%20Testing%20Access)** — we'll get back to you within 24 hours.
 
-> Detailed guide: [Customer](README-ios-customer.md) | [Workshop](README-ios-workshop.md)
+> Detailed guides: [iOS Customer](README-ios-customer.md) | [iOS Workshop](README-ios-workshop.md) | [Android Customer](README-android-customer.md) | [Android Workshop](README-android-workshop.md)
 
 ---
 
