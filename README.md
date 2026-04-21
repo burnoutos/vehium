@@ -59,7 +59,7 @@ Vehium is a smart garage management platform that helps workshops manage their e
 |----------|----------|--------------|
 | **Windows** | [**Vehium Setup (x64)**](https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Setup-x64.exe) | Windows 10/11 (64-bit) |
 | **Web** | [app.vehium.com](https://app.vehium.com) | Any modern browser |
-| **iOS** | Coming soon to the App Store | iOS 15.0+ |
+| **iOS** | [iOS AppStore](https://apps.apple.com/us/app/vehium-workshop/id6761576687) | iOS 15.0+ |
 | **Android** | Coming soon to Google Play | Android 7.0+ |
 
 ### Customer App
@@ -67,7 +67,7 @@ Vehium is a smart garage management platform that helps workshops manage their e
 | Platform | Download | Requirements |
 |----------|----------|--------------|
 | **Web** | [customer.vehium.com](https://customer.vehium.com) | Any modern browser |
-| **iOS** | Coming soon to the App Store | iOS 15.0+ |
+| **iOS** | [iOS AppStore](https://apps.apple.com/us/app/vehium/id6761552709) | iOS 15.0+ |
 | **Android** | Coming soon to Google Play | Android 7.0+ |
 
 > Want early access? Email us at **[info@vehium.com](mailto:info@vehium.com?subject=Vehium%20Internal%20Testing%20Access)** to join our internal testing program — we'll get back to you within 24 hours.
