@@ -59,8 +59,8 @@ Vehium is a smart garage management platform that helps workshops manage their e
 |----------|----------|--------------|
 | **Windows** | [**Vehium Setup (x64)**](https://github.com/burnoutos/vehium/releases/latest/download/Vehium-Setup-x64.exe) | Windows 10/11 (64-bit) |
 | **Web** | [Web Browser](https://app.vehium.com) | Any modern browser |
-| **iOS** | [iOS AppStore](https://apps.apple.com/us/app/vehium-workshop/id6761576687) | iOS 15.0+ |
-| **Android** | Coming soon to Google Play | Android 7.0+ |
+| **iOS** | [AppStore](https://apps.apple.com/us/app/vehium-workshop/id6761576687) | iOS 15.0+ |
+| **Android** | [PlayStore](https://play.google.com/store/apps/details?id=com.atheod.BurnoutOSPortal) | Android 7.0+ |
 
 ### Customer App
 
@@ -78,7 +78,7 @@ Vehium is a smart garage management platform that helps workshops manage their e
 
 | | Windows | Web | iOS | Android |
 |---|:---:|:---:|:---:|:---:|
-| Workshop App | **Yes** | **Yes** | **Yes** | Coming Soon |
+| Workshop App | **Yes** | **Yes** | **Yes** | **Yes** |
 | Customer App | — | **Yes** | **Yes** | Coming Soon |
 | Real-time Sync | **Yes** | **Yes** | **Yes** | **Yes** |
 
