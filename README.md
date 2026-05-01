@@ -68,7 +68,7 @@ Vehium is a smart garage management platform that helps workshops manage their e
 |----------|----------|--------------|
 | **Web** | [Web Browser](https://customer.vehium.com) | Any modern browser |
 | **iOS** | [iOS AppStore](https://apps.apple.com/us/app/vehium/id6761552709) | iOS 15.0+ |
-| **Android** | Coming soon to Google Play | Android 7.0+ |
+| **Android** | [PlayStore](https://play.google.com/store/apps/details?id=com.atheod.BurnoutOSCustomer) | Android 7.0+ |
 
 > Want early access? Email us at **[info@vehium.com](mailto:info@vehium.com?subject=Vehium%20Internal%20Testing%20Access)** to join our internal testing program — we'll get back to you within 24 hours.
 
@@ -79,7 +79,7 @@ Vehium is a smart garage management platform that helps workshops manage their e
 | | Windows | Web | iOS | Android |
 |---|:---:|:---:|:---:|:---:|
 | Workshop App | **Yes** | **Yes** | **Yes** | **Yes** |
-| Customer App | — | **Yes** | **Yes** | Coming Soon |
+| Customer App | — | **Yes** | **Yes** |  **Yes** |
 | Real-time Sync | **Yes** | **Yes** | **Yes** | **Yes** |
 
 ---
