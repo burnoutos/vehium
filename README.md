@@ -105,45 +105,103 @@ Coming soon to the App Store and Google Play worldwide. To join our internal tes
 
 ## Infrastructure
 
-Vehium runs on a self-hosted **3-node Kubernetes high-availability cluster** on bare metal.
+Vehium runs on **two self-hosted Kubernetes clusters on bare metal** — a primary production cluster and a fully independent disaster-recovery cluster — both designed for high availability and rapid failover.
 
 ### Architecture
 
 ```
-         vehium.com / app.vehium.com / customer.vehium.com
-                          │
-                    Load Balancer + TLS
-                          │
-         ┌────────────────┼────────────────┐
-         │                │                │
-    ┌─────────┐     ┌─────────┐     ┌─────────┐
-    │  Node 1 │     │  Node 2 │     │  Node 3 │
-    │  16 GB  │     │  16 GB  │     │  16 GB  │
-    │ MASTER  │     │ MASTER  │     │ MASTER  │
-    │  DB PRI │◄───►│  DB REP │◄───►│  DB REP │
-    └─────────┘     └─────────┘     └─────────┘
-                          │
-                  Daily Offsite Backups
+            vehium.com / app.vehium.com / customer.vehium.com
+                                │
+                       Load Balancer + TLS
+                                │
+        ┌───────────────────────┼───────────────────────┐
+        │                       │                       │
+   ┌─────────┐             ┌─────────┐             ┌─────────┐
+   │  Node 1 │             │  Node 2 │             │  Node 3 │
+   │  MASTER │◄───────────►│  MASTER │◄───────────►│  MASTER │
+   │  DB PRI │   etcd q.   │  DB REP │   etcd q.   │  DB REP │
+   └─────────┘             └─────────┘             └─────────┘
+        │                       │                       │
+        └────── Replicated block storage (3× copies) ───┘
+                                │
+              ┌─────────────────┴─────────────────┐
+              │                                   │
+       Continuous WAL                    Daily snapshots
+       streaming + PITR                  (DB / volumes / etcd)
+              │                                   │
+              └────────► Encrypted offsite backups (EU region)
+                                │
+                                ▼
+               ┌──────────────────────────────────┐
+               │   Independent DR Cluster (3-node)│
+               │   Cold standby, restore-ready    │
+               └──────────────────────────────────┘
 ```
 
 ### Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Orchestration | Kubernetes — 3 master nodes, fully HA |
-| Database | PostgreSQL — streaming replication across all nodes |
-| Storage | Replicated block storage (3x) for file uploads |
-| Ingress | Reverse proxy with automatic TLS certificates |
-| Deployment | GitOps — git push to deploy |
-| Backups | Daily automated offsite backups |
-| Power | UPS-protected with graceful shutdown |
+| Orchestration | Kubernetes — 3 control-plane nodes, fully HA |
+| Virtual IP | Floating control-plane VIP (kube-vip) |
+| Service Load Balancing | MetalLB in L2 mode |
+| Ingress | Reverse proxy with automatic TLS certificate renewal |
+| Database | PostgreSQL with streaming replication, managed by an operator |
+| Database Backups | Continuous WAL archiving + point-in-time recovery |
+| Block Storage | Longhorn — distributed, replicated 3× across nodes |
+| Cluster Backups | Volume snapshots + full-cluster backup tooling (Velero) |
+| Offsite Backups | Encrypted daily backups to S3-compatible object storage (Backblaze B2, EU region) |
+| Deployment | GitOps — `git push` reconciles the cluster (Argo CD, HA mode) |
+| Observability | Prometheus + Grafana with multi-channel alerting |
+| Power | UPS-protected nodes with NUT-coordinated graceful shutdown |
+| Disaster Recovery | Independent secondary 3-node cluster, ready to restore from offsite backups |
+
+### Backup Strategy
+
+Vehium follows a **defence-in-depth** backup model — multiple independent layers, each protecting against a different failure mode:
+
+1. **In-cluster replication** — every database write streams synchronously to two replicas; every persistent volume keeps three live copies on different nodes.
+2. **Continuous database archiving** — write-ahead logs ship continuously to offsite object storage, enabling point-in-time recovery to any moment in the retention window.
+3. **Daily logical dumps** — full `pg_dump` snapshots of every database, retained on a rolling schedule.
+4. **Daily cluster snapshots** — Velero captures Kubernetes resources and persistent volumes, encrypted at rest.
+5. **etcd snapshots** — the cluster's source of truth is snapshotted on a fixed cadence and pushed offsite.
+6. **Geographic separation** — all offsite backups live in a different country from the primary cluster, in encrypted buckets with versioning and lifecycle policies.
+
+### Disaster Recovery
+
+A fully independent **second 3-node Kubernetes cluster** stands by as a cold-standby. It runs the same operating system, container runtime, and tooling as production, and is wired into the same GitOps repository — so a recovery boils down to:
+
+1. Restore offsite backups (database, volumes, etcd) into the standby cluster.
+2. Argo CD reconciles application manifests from git automatically.
+3. DNS is repointed once health checks pass.
+
+Recovery objectives:
+
+- **RPO** (max data loss) — minutes, thanks to continuous WAL streaming.
+- **RTO** (time to restore service) — a few hours for a full from-scratch rebuild, far less for partial failures.
 
 ### Resilience
 
-- **Node failure** — cluster maintains quorum, pods reschedule automatically, database promotes a replica within seconds
-- **Power outage** — UPS triggers graceful shutdown, all nodes auto-restart when power returns
-- **Disk failure** — replicated storage serves data from remaining nodes and self-heals
-- **Full cluster loss** — complete rebuild from offsite backups in ~2-4 hours
+- **Node failure** — etcd quorum holds, pods reschedule automatically, the database promotes a replica within seconds, and the floating VIP moves to a healthy node.
+- **Disk failure** — replicated storage continues serving from surviving replicas and rebuilds the missing replica in the background.
+- **Power outage** — UPS triggers a coordinated graceful shutdown across the cluster; nodes auto-restart and rejoin once power returns.
+- **Network blip** — kube-vip + MetalLB re-elect endpoints; clients see at most a brief reconnect.
+- **Full primary cluster loss** — restore from offsite backups into the DR cluster; GitOps brings applications back automatically.
+- **Backup destination loss** — backup targets are versioned and lifecycle-managed; multiple independent backup types mean no single corruption can take everything out.
+
+### Observability
+
+- Metrics, logs, and dashboards via Prometheus and Grafana.
+- Alert rules cover node health, storage capacity, certificate expiry, replication lag, backup freshness, and application SLOs.
+- Alerts fan out over email and other channels so issues surface within minutes — even outside working hours.
+
+### GitOps Deployment
+
+Every change to production — application code, infrastructure configuration, secrets references — flows through git. Argo CD continuously reconciles the cluster against the repository, which means:
+
+- Every change is reviewed, versioned, and reversible.
+- Rollback is a `git revert`.
+- The cluster is reproducible from source.
 
 ---
 
